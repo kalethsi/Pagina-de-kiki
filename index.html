@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feliz Cumpleaños Amor 💖</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Sacramento&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Comic+Relief:wght@400;700&family=Sancreek&display=swap" rel="stylesheet">
+
+
+
+    <style>
+        .cute-font { font-family: 'Sacramento', cursive; }
+        .sancreek-regular {
+  font-family: "Sancreek", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+        body { background-color: #FFF8F2; overflow: hidden; }
+        .main-pink { background-color: #F472B6; }
+        .main-pink:hover { background-color: #EC4899; }
+        #confetti-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 10; }
+        .confetti-piece { position: absolute; border-radius: 50%; opacity: 0.8; animation: fall linear infinite; }
+        @keyframes fall {
+            0% { transform: translateY(-100vh); opacity: 0; }
+            10%,90% { opacity: 0.8; }
+            100% { transform: translateY(100vh); opacity: 0; }
+        }
+        #floating-message {
+  font-family: 'Inter', sans-serif; /* Cambia a 'Sacramento', cursive; si la quieres más cursiva y romántica */
+}
+    </style>
+</head>
+<body class="flex items-center justify-center min-h-screen p-4 text-center relative">
+
+    <div id="confetti-container"></div>
+
+    <div id="main-content-area" class="flex flex-col items-center justify-center min-h-screen w-full z-20">
+        <div class="space-y-8 max-w-lg w-full">
+            <h1 class="cute-font text-6xl sm:text-7xl md:text-8xl text-[#F472B6] leading-tight drop-shadow-lg">
+                Feliz Cumpleaños Amor 💖
+            </h1>
+            <p class="sancreek-regular text-2xl sm:text-7xl md:text-8xl text-[#F472B6] leading-tight drop-shadow-lg">
+                Hice esta pagina con muchas frases 
+                para que me recuerdes.
+                La idea es que cuando sientas dolor-ansiedad
+                puedas entrar aqui para relajarte cuidando a
+                este capy (el capibara eres tu jsjs)
+
+            </p>
+            <button
+                id="enter-button"
+                class="main-pink text-white font-inter font-semibold py-4 px-8 rounded-full shadow-xl
+                       transition duration-300 ease-in-out transform hover:scale-105 hover:shadow-2xl
+                       text-lg tracking-wider"
+                style="font-family: 'Inter', sans-serif;"
+            >
+                Entrar al santuario
+            </button>
+        </div>
+    </div>
+
+    <div id="sanctuary-content-area" class="fixed inset-0 w-full min-h-screen flex flex-col items-center z-20 hidden p-4 sm:p-8 gap-4 overflow-y-auto">
+        <h2 id="capybara-display-name" class="cute-font text-5xl md:text-6xl text-[#F472B6] mt-6 p-4 bg-white/70 rounded-xl shadow-lg flex-shrink-0"></h2>
+
+        <!-- 🔧 NUEVO: Barras de estado -->
+        <div class="w-full max-w-md space-y-3">
+            <!-- Hambre -->
+            <div class="w-full bg-gray-200 rounded-full h-5 overflow-hidden">
+                <div id="hunger-bar" class="bg-green-500 h-full rounded-full transition-all duration-500" style="width:100%"></div>
+            </div>
+            <!-- Sueño -->
+            <div class="w-full bg-gray-200 rounded-full h-5 overflow-hidden">
+                <div id="sleep-bar" class="bg-blue-500 h-full rounded-full transition-all duration-500" style="width:100%"></div>
+            </div>
+            <!-- Amor -->
+            <div class="w-full bg-gray-200 rounded-full h-5 overflow-hidden">
+                <div id="love-bar" class="bg-pink-400 h-full rounded-full transition-all duration-500" style="width:100%"></div>
+            </div>
+        </div>
+
+        <!-- 🔧 video -->
+        <div class="flex items-center justify-center w-full p-4 flex-grow max-h-[60vh]">
+            <div class="w-full max-w-xs rounded-2xl shadow-2xl border-4 border-pink-300 overflow-hidden">
+                <video 
+                    id="capybara-video" 
+                    src="1.mp4" 
+                    class="w-full h-auto"
+                    playsinline
+                    preload="auto"
+                    style="display:block; outline:none;"
+                    loop
+                ></video>
+            </div>
+        </div>
+
+        <!-- Botones -->
+        <div class="mb-6 w-full flex justify-center space-x-4 px-4 flex-shrink-0">
+            <button id="btn-hunger" class="w-20 h-20 rounded-full shadow-xl transition duration-300 transform hover:scale-105 hover:shadow-2xl text-2xl bg-green-500 hover:bg-green-600 text-white flex items-center justify-center font-inter font-semibold">🍃</button>
+            <button id="btn-sleep"  class="w-20 h-20 rounded-full shadow-xl transition duration-300 transform hover:scale-105 hover:shadow-2xl text-2xl bg-blue-500 hover:bg-blue-600 text-white flex items-center justify-center font-inter font-semibold">😴</button>
+            <button id="btn-love"   class="w-20 h-20 rounded-full shadow-xl transition duration-300 transform hover:scale-105 hover:shadow-2xl text-2xl main-pink text-white flex items-center justify-center font-inter font-semibold">💖</button>
+        </div>
+    </div>
+
+    <div id="message-box" class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white p-6 rounded-xl shadow-2xl z-50 hidden max-w-sm w-full border-4 border-[#F472B6] drop-shadow-2xl">
+        <h3 class="text-xl font-bold text-[#F472B6] mb-4">¡Sorpresa!</h3>
+        <p class="text-gray-700 mb-6">¡Bienvenido al santuario! Escoge el nombre de tu capibara:</p>
+        <input
+            type="text"
+            id="capybara-name"
+            placeholder="Ej: Capy, Pelusín, Amor"
+            class="w-full px-4 py-3 mb-6 border-2 border-pink-200 rounded-lg focus:outline-none focus:border-[#F472B6] transition duration-200"
+            maxlength="20"
+        >
+        <button id="enter-sanctuary-button" class="main-pink text-white font-semibold py-2 px-6 rounded-full w-full">Entrar</button>
+    </div>
+
+    <!-- 🔧 NUEVO: Mensaje flotante -->
+<div id="floating-message" class="fixed top-6 left-1/2 transform -translate-x-1/2 bg-white/80 text-[#F472B6] 
+rounded-xl px-6 py-3 text-2xl shadow-lg z-50 hidden transition-opacity duration-500"
+style="font-family: 'Inter', cursive;">
+</div>
+
+<audio id="bg-music" src="1.mp3" autoplay loop hidden></audio>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const container = document.getElementById('confetti-container');
+    const button = document.getElementById('enter-button');
+    const messageBox = document.getElementById('message-box');
+    const mainContent = document.getElementById('main-content-area');
+    const sanctuaryContent = document.getElementById('sanctuary-content-area');
+    const enterSanctuaryButton = document.getElementById('enter-sanctuary-button');
+    const capybaraNameInput = document.getElementById('capybara-name');
+    const capybaraDisplayName = document.getElementById('capybara-display-name');
+    const capybaraVideo = document.getElementById('capybara-video');
+    const hungerBar = document.getElementById('hunger-bar');
+    const sleepBar = document.getElementById('sleep-bar');
+    const loveBar = document.getElementById('love-bar');
+    const floatingMessage = document.getElementById('floating-message');
+
+
+    const [hungerButton, sleepButton, loveButton] = document.querySelectorAll('#sanctuary-content-area button');
+
+    const pastelColors = ['#FFC0CB','#ADD8E6','#FAFAD2','#90EE90','#DDA0DD','#FFE4B5'];
+    const NUM_CONFETTI = 60;
+
+    function createConfettiPiece() {
+        const piece = document.createElement('div');
+        piece.classList.add('confetti-piece');
+        const color = pastelColors[Math.floor(Math.random() * pastelColors.length)];
+        piece.style.backgroundColor = color;
+        const size = Math.random() * 10 + 5;
+        piece.style.width = `${size}px`;
+        piece.style.height = `${size}px`;
+        piece.style.left = `${Math.random() * 100}vw`;
+        piece.style.animationDuration = `${Math.random() * 15 + 10}s`;
+        piece.style.animationDelay = `-${Math.random() * 10}s`;
+        container.appendChild(piece);
+        piece.addEventListener('animationend', () => {
+            piece.remove();
+            createConfettiPiece();
+        });
+    }
+
+    for (let i = 0; i < NUM_CONFETTI; i++) createConfettiPiece();
+
+    button.addEventListener('click', () => {
+        messageBox.classList.remove('hidden');
+        capybaraNameInput.focus();
+    });
+
+    enterSanctuaryButton.addEventListener('click', () => {
+        let capybaraName = capybaraNameInput.value.trim();
+        if (!capybaraName) capybaraName = "Capy";
+        messageBox.classList.add('hidden');
+        mainContent.classList.add('hidden');
+        sanctuaryContent.classList.remove('hidden');
+        capybaraDisplayName.textContent = capybaraName;
+        capybaraVideo.play().catch(err => console.warn("Autoplay bloqueado:", err));
+const bgMusic = document.getElementById('bg-music');
+bgMusic.volume = 0.4; // volumen suave
+bgMusic.play().catch(err => console.warn("No se pudo iniciar la música:", err));
+
+    });
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && !messageBox.classList.contains('hidden')) {
+            messageBox.classList.add('hidden');
+        }
+    });
+
+        // 🌸 Función para mostrar mensajes flotantes
+    function showFloatingMessage(messages) {
+        const randomMsg = messages[Math.floor(Math.random() * messages.length)];
+        floatingMessage.textContent = randomMsg;
+        floatingMessage.classList.remove('hidden');
+        floatingMessage.style.opacity = '1';
+
+        setTimeout(() => {
+            floatingMessage.style.opacity = '0';
+            setTimeout(() => floatingMessage.classList.add('hidden'), 500);
+        }, 8000); // dura 8 segundos
+    }
+
+    // 🎬 --- CONTROL DE VIDEOS ---
+    let defaultVideo = '1.mp4';
+    let videoHambre = '3.mp4';
+    let videoSueño = '4.mp4';
+    let videoAmor = '2.mp4';
+    let currentMode = null; // "hambre", "sueño", "amor"
+
+    function playSpecialVideo(src, mode) {
+        if (currentMode) {
+            capybaraVideo.pause();
+            capybaraVideo.currentTime = 0;
+        }
+        capybaraVideo.src = src;
+        capybaraVideo.loop = false;
+        currentMode = mode;
+        capybaraVideo.play().catch(err => console.warn("No se pudo reproducir:", err));
+    }
+
+// 🍃 Botón de hambre
+    hungerButton.addEventListener('click', () => {
+        updateBar(hungerBar, 10);
+        playSpecialVideo(videoHambre, "hambre");
+        showFloatingMessage(["¿Ya comiste, mocosa? 🍽️💕", "No me hagas regañarte, ve a comer 😤💖", "Mi niña, no puedes vivir solo de café 😒☕", "Anda, come algo rico, por mí 😌🍲", "Prométeme que vas a almorzar hoy 💕🥗", "No quiero una novia con hambre, quiero una feliz 😋💞", "Come bien, amor, que te necesito fuerte 💪💖", "Si estuviera ahí, te cocinaría algo rico 🍝💫", "Mi niña, deja el cel y come 🥺🍽️", "No trasnoches y tampoco te saltes la comida 😴🍛", "Esa pancita necesita comida, no excusas 😤🍔", "Amor, ya comiste o te mando a dormir sin cena 😡💋", "Come algo aunque sea poquito, por favor 🥹💞", "Mi mocosa, comer también es cuidarse 💕🥙", "Anda a comer antes de que me preocupe 😠💖", "No me gusta saber que pasas hambre 😣🍱", "Quiero que comas bien, no que sobrevivas 😤🍲", "Mi niña, come algo calentito 💕🍜", "Si no comes, me voy a enojar (un poquito) 😤❤️", "Te amo, pero más si comes a tiempo 😋💞"]);
+    });
+
+    // 😴 Botón de sueño
+    sleepButton.addEventListener('click', () => {
+        updateBar(sleepBar, 10);
+        playSpecialVideo(videoSueño, "sueño");
+        showFloatingMessage(["Ve a dormir, mi amor 🌙", "No trasnoches tanto, vida 💫", "Cierra esos ojitos ya 😌💤", "Descansa, te lo mereces 💖", "Apaga el cel y sueña conmigo 😴💕", "Duerme rico, mi niña 🌸", "Prométeme que vas a dormir temprano hoy 💤💙", "Ojalá pudiera darte las buenas noches en persona 🌙🤍", "Ya es hora de mimir 😴✨", "Que tengas sueños lindos, amorcito 💕🌠", "Descansa, que mañana te quiero ver con energía 💪💖", "Cierra los ojos, respira y olvida el día 🌙🌿", "Duerme temprano, mi amorcito 🛌💞", "Sueña bonito, preciosa 🌷💫", "Ya es tarde, amor, ve a descansar 😴💋", "Ojalá soñemos lo mismo esta noche 💭💙", "Duerme tranquila, que yo te cuido desde aquí 🌙🤍", "Ya no trasnoches tanto, mi vida 🌃💖", "Buenas noches, mi motivo favorito 💫💤", "Apaga todo y descansa, te amo 💕🌙"]);
+    });
+
+    // 💖 Botón de amor
+    loveButton.addEventListener('click', () => {
+        updateBar(loveBar, 10);
+        playSpecialVideo(videoAmor, "amor");
+        showFloatingMessage(["Te amo, mocosa 💕", "Eres mi razón favorita del día 💫", "No sé cómo lo haces, pero siempre me haces sonreír 😍", "Mi niña, no tienes idea de cuánto te quiero 💖", "Cada vez que pienso en ti, se me alegra el alma 💭💙", "Eres lo mejor que me pasó, mocosa 💞", "Te pienso más de lo que debería 😳💘", "Mi niña linda, me encantas más cada día 🌷", "No necesito nada más si te tengo a ti 💫❤️", "Tienes una forma mágica de hacer que todo sea mejor ✨", "Mocosa, me tienes completamente enamorado 😍💋", "Eres mi paz y mi caos al mismo tiempo 💞🔥", "Te juro que contigo todo tiene sentido 💖", "Mi niña, eres mi lugar favorito 🌙💫", "Te amo sin pausa, sin punto final 💕", "Cada mensaje tuyo me cambia el día 😌💬", "Contigo hasta lo simple se siente especial 💫💙", "Eres mi persona, mocosa 💋💖", "No sé cómo lo logras, pero cada día me gustas más 😍🌸", "Mi niña, gracias por existir 💕✨"]);
+    });
+
+    // Volver al video base al terminar
+    capybaraVideo.addEventListener('ended', () => {
+        if (currentMode) {
+            currentMode = null;
+            capybaraVideo.src = defaultVideo;
+            capybaraVideo.loop = true;
+            capybaraVideo.play().catch(() => {});
+        }
+    });
+
+    // 🌿 Barras (igual)
+    function updateBar(bar, amount) {
+        let width = parseFloat(bar.style.width);
+        width = Math.max(0, Math.min(100, width + amount));
+        bar.style.width = width + '%';
+    }
+
+    function decreaseBar(bar, amount, interval) {
+        setInterval(() => updateBar(bar, -amount), interval);
+    }
+
+    decreaseBar(hungerBar, 1, 5000);
+    decreaseBar(sleepBar, 1, 9000);
+    decreaseBar(loveBar, 1, 1000);
+});
+</script>
+
+</body>
+</html>
